@@ -1,26 +1,26 @@
 import { useState, useEffect } from "react";
 
 export default function GitHubUserSearch() {
-  // State variables
+
   const [username, setUsername] = useState("");
   const [user, setUser] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
   const [darkMode, setDarkMode] = useState(false);
 
-  // Load default user and check color scheme when component mounts
+
   useEffect(() => {
-    // Check if user prefers dark mode
+
     const prefersDark = window.matchMedia(
       "(prefers-color-scheme: dark)"
     ).matches;
     setDarkMode(prefersDark);
 
-    // Load The Octocat as default user
+   
     loadDefaultUser();
   }, []);
 
-  // Apply dark/light mode
+ 
   useEffect(() => {
     if (darkMode) {
       document.documentElement.classList.add("dark");
@@ -29,7 +29,7 @@ export default function GitHubUserSearch() {
     }
   }, [darkMode]);
 
-  // Default user data (The Octocat)
+
   function loadDefaultUser() {
     setUser({
       login: "octocat",
@@ -47,7 +47,7 @@ export default function GitHubUserSearch() {
     });
   }
 
-  // Search for a GitHub user
+
   function searchUser(e) {
     e.preventDefault();
     if (!username.trim()) return;
@@ -75,7 +75,7 @@ export default function GitHubUserSearch() {
       });
   }
 
-  // Format date to readable format
+
   function formatDate(dateString) {
     const date = new Date(dateString);
     return date.toLocaleDateString("en-US", {
@@ -103,7 +103,7 @@ export default function GitHubUserSearch() {
           </button>
         </header>
 
-        {/* Search Form */}
+       
         <form onSubmit={searchUser} className="mb-6">
           <div
             className={`flex items-center rounded-lg shadow-md overflow-hidden ${
@@ -129,7 +129,7 @@ export default function GitHubUserSearch() {
           {error && <p className="mt-2 text-red-500 font-bold">{error}</p>}
         </form>
 
-        {/* User Profile Card */}
+
         {user && (
           <div
             className={`rounded-lg shadow-lg p-6 ${
@@ -137,7 +137,7 @@ export default function GitHubUserSearch() {
             }`}
           >
             <div className="flex flex-col md:flex-row gap-6">
-              {/* Avatar */}
+             
               <div className="flex-shrink-0 w-24 h-24 md:w-28 md:h-28">
                 <img
                   src={user.avatar_url}
@@ -146,7 +146,7 @@ export default function GitHubUserSearch() {
                 />
               </div>
 
-              {/* User Info */}
+
               <div className="flex-grow">
                 <div className="flex flex-col md:flex-row md:justify-between md:items-start mb-6">
                   <div>
@@ -171,12 +171,12 @@ export default function GitHubUserSearch() {
                   </p>
                 </div>
 
-                {/* Bio */}
+
                 <p className={`mb-6 ${!user.bio && "opacity-70 italic"}`}>
                   {user.bio || "This profile has no bio"}
                 </p>
 
-                {/* Stats */}
+
                 <div
                   className={`grid grid-cols-3 gap-4 rounded-lg p-4 mb-6 ${
                     darkMode ? "bg-gray-900" : "bg-gray-100"
@@ -220,7 +220,7 @@ export default function GitHubUserSearch() {
                   </div>
                 </div>
 
-                {/* Links */}
+
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                   <div
                     className={`flex items-center gap-3 ${
